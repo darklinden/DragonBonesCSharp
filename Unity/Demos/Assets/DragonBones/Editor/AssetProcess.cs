@@ -122,7 +122,7 @@ namespace DragonBones
                 return true;
             }
 
-            if(asset.text == "DBDT")
+            if (asset.text.StartsWith("DBDT"))
             {
                 return true;
             }

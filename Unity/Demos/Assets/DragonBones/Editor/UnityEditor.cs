@@ -255,7 +255,7 @@ namespace DragonBones
 
         public static void GetTextureAtlasConfigs(List<string> textureAtlasFiles, string filePath, string rawName = null, string suffix = "tex")
         {
-            var folder = Directory.GetParent(filePath).ToString();
+            var folder = Path.GetDirectoryName(filePath);
 
             var name = rawName != null ? rawName : filePath.Substring(0, filePath.LastIndexOf(".")).Substring(filePath.LastIndexOf("/") + 1);
             if (name.LastIndexOf("_ske") == name.Length - 4)
@@ -340,7 +340,7 @@ namespace DragonBones
                 string dataPath = path + "_Data.asset";
 
                 var jsonObject = (Dictionary<string, object>)MiniJSON.Json.Deserialize(dragonBonesAsset.text);
-                if (dragonBonesAsset.text == "DBDT")
+                if (dragonBonesAsset.text.StartsWith("DBDT"))
                 {
                     int headerLength  = 0;
                     jsonObject = BinaryDataParser.DeserializeBinaryJsonData(dragonBonesAsset.bytes, out headerLength);
@@ -441,7 +441,7 @@ namespace DragonBones
                 if (assetPath.EndsWith(".bytes"))
                 {
                     TextAsset asset = AssetDatabase.LoadAssetAtPath<TextAsset>(assetPath);
-                    if (asset && asset.text == "DBDT")
+                    if (asset && asset.text.StartsWith("DBDT"))
                     {
                         dragonBonesSkePaths.Add(assetPath);
                     }

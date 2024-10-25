@@ -709,7 +709,7 @@ namespace DragonBones
             }
 
             DragonBonesData data = null;
-            if (dragonBonesJSON.text == "DBDT")
+            if (dragonBonesJSON.text.StartsWith("DBDT"))
             {
                 BinaryDataParser.jsonParseDelegate = MiniJSON.Json.Deserialize;
                 data = ParseDragonBonesData(dragonBonesJSON.bytes, name, scale); // Unity default Scale Factor.
